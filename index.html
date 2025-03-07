@@ -8,94 +8,124 @@
   </head>
   <body>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kumar+One+Outline&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Kumar+One+Outline&display=swap");
 
-        .number { 
-            font-family: "Kumar One Outline", system-ui;
-        }
-
+      .number {
+        font-family: "Kumar One Outline", system-ui;
+      }
     </style>
 
-    <main class="flex items-center justify-center bg-gradient-to-l from-black to-zinc-900 select-none p-20 h-[100vh]">
-        <div class="flex flex-col">
-            <p class="text-9xl text-center font-bold z-0 text-white/[0.1]">The <span class="text-[9rem] text-orange-500">IN</span><span class="text-[9rem] text-white">DI</span><span class="text-[9rem] text-green-500">AN</span> Clock</p>
- 
-            <div class="flex flex-col space-y-10 p-10 mt-[-2.5rem] bg-gradient-to-b from-black to-zinc-800 rounded-3xl shadow-lg z-10">
-                <ul id="clock" class="flex space-x-5 number text-white">
-                    <li>
-                        <div class="flex flex-col bg-gradient-to-b from-black to-zinc-800 text-center p-10 rounded-2xl shadow-lg shadow-black w-96">
-                            <p id="hour" class="text-[10rem] font-bold"></p>
-                            <p class="text-4xl font-medium">HOURS</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex flex-col bg-gradient-to-b from-black to-zinc-800 text-center p-10 rounded-2xl shadow-lg shadow-black w-96">
-                            <p id="min" class="text-[10rem] font-bold"></p>
-                            <p class="text-4xl font-medium">MINUTES</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex flex-col bg-gradient-to-b from-black to-zinc-800 text-center p-10 rounded-2xl shadow-lg shadow-black w-96">
-                            <p id="sec" class="text-[10rem] font-bold"></p>
-                            <p class="text-4xl font-medium">SECONDS</p>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul class="flex space-x-5 text-center font-bold text-4xl text-white w-full">
-                    <li class="rounded-xl bg-orange-500 shadow-black shadow-lg w-full">
-                        <p id="day" class="p-5"></p>
-                    </li>
-                    <li class="text-center rounded-xl bg-white text-black shadow-black shadow-lg w-full">
-                        <p id="month" class="p-5"></p>
-                    </li>
-                    <li class="text-center rounded-xl bg-green-500 shadow-black shadow-lg w-full">
-                        <p id="year" class="p-5"></p>
-                    </li>
-                </ul>
-            </div>
-
-
+    <main
+      class="flex items-center justify-center bg-gradient-to-l from-black to-zinc-900 select-none p-20 h-[100vh]"
+    >
+      <div class="flex flex-col">
+        <h1 class="text-[14rem] leading-none text-center font-bold z-0 text-white/[0.1] uppercase">
+          Dark Clock
+        </h1>
+        <div
+          class="flex flex-col space-y-10 p-10 bg-gradient-to-b from-black to-zinc-800 rounded-3xl shadow-lg z-10"
+        >
+          <ul id="clock" class="flex space-x-5 number text-white">
+            <li>
+              <div
+                class="flex flex-col bg-gradient-to-b from-black to-zinc-800 text-center p-10 rounded-2xl shadow-lg shadow-black w-96"
+              >
+                <p id="hour" class="text-[10rem] font-bold"></p>
+                <p class="text-4xl font-medium">HOURS</p>
+              </div>
+            </li>
+            <li>
+              <div
+                class="flex flex-col bg-gradient-to-b from-black to-zinc-800 text-center p-10 rounded-2xl shadow-lg shadow-black w-96"
+              >
+                <p id="min" class="text-[10rem] font-bold"></p>
+                <p class="text-4xl font-medium">MINUTES</p>
+              </div>
+            </li>
+            <li>
+              <div
+                class="flex flex-col bg-gradient-to-b from-black to-zinc-800 text-center p-10 rounded-2xl shadow-lg shadow-black w-96"
+              >
+                <p id="sec" class="text-[10rem] font-bold"></p>
+                <p class="text-4xl font-medium">SECONDS</p>
+              </div>
+            </li>
+          </ul>
+          <ul
+            class="flex space-x-5 text-center font-bold text-4xl text-white w-full"
+          >
+            <li class="rounded-xl bg-orange-500 shadow-black shadow-lg w-full">
+              <p id="day" class="p-5"></p>
+            </li>
+            <li
+              class="text-center rounded-xl bg-white text-black shadow-black shadow-lg w-full"
+            >
+              <p id="month" class="p-5"></p>
+            </li>
+            <li
+              class="text-center rounded-xl bg-green-500 shadow-black shadow-lg w-full"
+            >
+              <p id="year" class="p-5"></p>
+            </li>
+          </ul>
         </div>
+      </div>
     </main>
 
-
     <script>
+      function startTime() {
+        const today = new Date();
 
-        
-        function startTime() {
-            
-            const today = new Date();
+        let h = today.getHours() - 12;
+        let m = today.getMinutes();
+        let s = today.getSeconds();
 
-            let h = today.getHours() - 12;
-            let m = today.getMinutes();
-            let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
 
-            m = checkTime(m);
-            s = checkTime(s);
-            
-            const days = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
-            const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
-            
-            document.getElementById("hour").innerHTML = h;
-            document.getElementById("min").innerHTML = m;
-            document.getElementById("sec").innerHTML = s;
+        const days = [
+          "SUNDAY",
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+        ];
+        const months = [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+          "AUGUST",
+          "SEPTEMBER",
+          "OCTOBER",
+          "NOVEMBER",
+          "DECEMBER",
+        ];
 
-            document.getElementById("day").innerHTML = days[today.getDay()];
-            document.getElementById("month").innerHTML = months[today.getMonth()];
-            document.getElementById("year").innerHTML = today.getFullYear();
-            
-            setTimeout(startTime, 1000);
+        document.getElementById("hour").innerHTML = h;
+        document.getElementById("min").innerHTML = m;
+        document.getElementById("sec").innerHTML = s;
+
+        document.getElementById("day").innerHTML = days[today.getDay()];
+        document.getElementById("month").innerHTML = months[today.getMonth()];
+        document.getElementById("year").innerHTML = today.getFullYear();
+
+        setTimeout(startTime, 1000);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
         }
+        return i;
+      }
 
-        function checkTime(i) {
-            if (i < 10) { i = "0" + i };
-            return i;
-        }
-
-        startTime();
-
+      startTime();
     </script>
-
   </body>
 </html>
